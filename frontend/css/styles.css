@@ -1,0 +1,374 @@
+/* Gameified Classroom Theme */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Sniglet&display=swap');
+
+:root {
+    --bg-purple: #2e0b4d;
+    --board-green: #2d5a3f;
+    --board-border: #a89f91;
+    --accent-yellow: #f1c40f;
+    --accent-red: #e74c3c;
+    --accent-purple: #9b59b6;
+    --text-white: #ffffff;
+
+    --font-heading: 'Fredoka One', cursive;
+    /* Big chunky font */
+    --font-body: 'Sniglet', cursive;
+    /* Readable but fun */
+}
+
+body {
+    background-color: var(--bg-purple);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    margin: 0;
+    overflow-x: hidden;
+    /* Subtle texture */
+    background-image: radial-gradient(#3a0e5e 15%, transparent 16%);
+    background-size: 20px 20px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+    margin: 0.5em 0;
+    letter-spacing: 1px;
+}
+
+/* Replaces "glass-panel" with "chalkboard-panel" vibe */
+.glass-panel {
+    background: rgba(46, 11, 77, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.chalkboard {
+    background-color: var(--board-green);
+    border: 8px solid var(--board-border);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+/* Buttons */
+.btn-academic {
+    background-color: var(--accent-yellow);
+    color: #2e0b4d;
+    font-family: var(--font-heading);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #c29d0b;
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-transform: uppercase;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-academic:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.btn-red {
+    background-color: var(--accent-red);
+    box-shadow: 0 5px 0 #c0392b;
+    color: white;
+}
+
+.btn-purple {
+    background-color: var(--accent-purple);
+    box-shadow: 0 5px 0 #8e44ad;
+    color: white;
+}
+
+.btn-green {
+    background-color: #2ecc71;
+    box-shadow: 0 5px 0 #27ae60;
+    color: white;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="password"],
+select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1.1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="range"] {
+    accent-color: var(--accent-yellow);
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+/* Layout Utilities */
+.lobby-grid {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Header User Pill */
+.user-pill {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--board-green);
+    border: 3px solid var(--board-border);
+    border-radius: 30px;
+    padding: 5px 15px 5px 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.user-avatar-small {
+    width: 35px;
+    height: 35px;
+    background: var(--accent-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+/* Login Specific */
+.slide-in {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+/* Animations */
+.shake-error {
+    animation: shake 0.5s;
+    border-color: var(--accent-red) !important;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(-5px)
+    }
+
+    75% {
+        transform: translateX(5px)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+}
+
+/* Loading Screen Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 11, 77, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.loading-overlay.hidden {
+    display: none;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.loading-spinner {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.spinner-ring:nth-child(1) {
+    border-top-color: var(--accent-yellow);
+    animation-duration: 1.5s;
+}
+
+.spinner-ring:nth-child(2) {
+    border-right-color: var(--accent-purple);
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+    border-bottom-color: #2ecc71;
+    animation-duration: 2.5s;
+}
+
+.spinner-icon {
+    font-size: 3em;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.loading-message {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Waiting Room */
+.classroom-board {
+    max-width: 800px;
+    margin: 60px auto;
+    /* space for pill */
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.student-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    background: #9b59b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    position: relative;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ready-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #2ecc71;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    border: 2px solid white;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

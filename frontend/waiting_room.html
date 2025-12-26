@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EDU PARTY MAYHEM - Classroom</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Waiting Room Specific Styles */
+        .classroom-board {
+            max-width: 900px;
+            margin: 40px auto;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Teacher Area */
+        .teacher-section {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .teacher-podium {
+            transform: scale(1.2);
+            /* Make teacher bigger */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Student Area */
+        .student-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            padding: 20px;
+            flex: 1;
+            align-content: flex-start;
+        }
+
+        .student-avatar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 80px;
+        }
+
+        .avatar-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            /* Squircle */
+            background: #9b59b6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            position: relative;
+            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .avatar-box.host {
+            border: 3px solid #f1c40f;
+            /* Gold border for teacher */
+            background: #2c3e50;
+        }
+
+        .ready-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #2ecc71;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            border: 2px solid white;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- User Pill (Top Right - Optional) -->
+    <div class="user-pill">
+        <div class="user-avatar-small">🎓</div>
+        <span id="user-name-small">Me</span>
+    </div>
+
+    <!-- Main Board -->
+    <div class="chalkboard classroom-board">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h1 id="lobby-name-display" style="font-size: 2.5em; margin: 0;">CLASSROOM</h1>
+            <p style="opacity: 0.7; font-size: 0.9em; margin: 5px 0;">Code: <span id="session-code-display">...</span>
+            </p>
+        </div>
+
+        <!-- Teacher Podium -->
+        <div id="teacher-area" class="teacher-section">
+            <p style="opacity: 0.5;">Connecting to teacher...</p>
+        </div>
+
+        <!-- Students Desks -->
+        <h3 style="text-align: center; opacity: 0.7; font-size: 1.2em; margin-top: 0;">CLASS MATES</h3>
+        <div id="student-area" class="student-section">
+            <p style="opacity: 0.6; font-family: var(--font-body);">Waiting for students to join...</p>
+        </div>
+
+        <!-- Controls Footer -->
+        <div id="controls" style="display: flex; gap: 10px; justify-content: center; width: 100%;">
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-academic" id="ready-btn"
+                    style="background: var(--panel-dark); border: 1px solid var(--border-color);">✋ READY</button>
+                <button class="btn-academic hidden" id="test-btn" style="background: #9b59b6;">🧪 TEST MODE</button>
+                <button class="btn-academic hidden" id="start-btn" style="background: var(--success-green);">START
+                    CLASS</button>
+            </div>
+            <button class="btn-academic" id="leave-btn" style="background: #e74c3c;">LEAVE CLASS</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/waiting_room.js"></script>
+    <script>
+        // Set small user name
+        document.getElementById('user-name-small').textContent = localStorage.getItem('username') || 'Me';
+    </script>
+</body>
+
+</html>

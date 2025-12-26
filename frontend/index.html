@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EDU PARTY MAYHEM - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Import Google Fonts: Merriweather (Serif) & Inter (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Full Screen Spinner -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="glass-panel slide-in">
+        <h1>EDU PARTY MAYHEM</h1>
+        <h2 id="form-title">Login</h2>
+
+        <!-- Error Container with Shake support -->
+        <div id="error-msg" class="hidden"
+            style="color: #e74c3c; margin-bottom: 10px; text-align: center; font-weight: bold;"></div>
+
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button type="submit" class="btn-academic" id="submit-btn" style="flex: 1;">Log In</button>
+                <button type="button" class="btn-academic" id="toggle-btn"
+                    style="background: transparent; border: 1px solid var(--accent-blue); color: var(--accent-blue); flex: 1;">Register</button>
+            </div>
+        </form>
+    </div>
+    <script type="module" src="js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EDU PARTY MAYHEM - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for Icons if needed, though we use emoji/text mostly -->
+</head>
+
+<body>
+    <!-- User Pill (Top Right) -->
+    <div class="user-pill" id="profile-trigger">
+        <div class="user-avatar-small" id="user-avatar-small">🎓</div>
+        <span id="user-name-display">Student</span>
+    </div>
+
+    <div class="lobby-grid">
+        <h1 style="text-align: center; font-size: 2.5em; margin-bottom: 0;">CLASS DASHBOARD</h1>
+
+        <!-- Host Section -->
+        <div class="glass-panel" style="background: rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1);">
+            <h2 style="text-align: center; color: white;">HOST A SECTOR</h2>
+            <div style="padding: 10px; text-align: center;">
+                <label style="display: block; margin-bottom: 10px; font-family: var(--font-body);">Lobby Name
+                    (Optional)</label>
+                <input type="text" id="lobby-name" placeholder="e.g., Math Masters Class"
+                    style="width: 80%; margin-bottom: 20px; text-align: center; padding: 10px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3); color: white; font-family: var(--font-body);">
+
+                <label style="display: block; margin-bottom: 10px; font-family: var(--font-body);">Max Students: <span
+                        id="player-count-display">15</span></label>
+                <!-- Custom thick slider or standard styled -->
+                <input type="range" id="player-count" min="2" max="50" value="15" style="margin-bottom: 20px;">
+
+                <div style="margin-bottom: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <!-- Simple toggle for public/private if needed, or just default -->
+                </div>
+
+                <button class="btn-academic" id="create-session-btn">CREATE NEW CLASS</button>
+            </div>
+        </div>
+
+        <!-- Active Classes Section -->
+        <div class="chalkboard">
+            <h2 style="text-align: center; margin-top: 0; color: #ecf0f1;">ACTIVE CLASSES</h2>
+            <div id="session-list"
+                style="min-height: 200px; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center;">
+                <p style="opacity: 0.7; font-family: 'Sniglet';">No classes active. Be the first!</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn-academic"
+                    style="font-size: 0.8em; padding: 5px 15px; background: rgba(255,255,255,0.2); box-shadow: none;"
+                    onclick="location.reload()">REFRESH</button>
+            </div>
+        </div>
+
+        <!-- Join Code Section (Optional/Small) -->
+        <div style="text-align: center; margin-top: 10px;">
+            <input type="text" id="join-code" placeholder="Enter Class Code"
+                style="text-align: center; max-width: 200px; display: inline-block;">
+            <button class="btn-academic btn-green" id="join-code-btn" style="padding: 10px 15px;">JOIN</button>
+        </div>
+    </div>
+
+    <!-- Profile Modal (Keep logic, style overlay) -->
+    <div id="profile-modal" class="hidden"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(46, 11, 77, 0.95); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+        <div class="chalkboard" style="width: 400px; border-color: #8e44ad;">
+            <h2 style="text-align: center;">EDIT PROFILE</h2>
+            <div style="margin-bottom: 20px;">
+                <label>Name</label>
+                <input type="text" id="edit-name">
+            </div>
+            <div style="margin-bottom: 20px; text-align: center;">
+                <label>Avatar</label>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <div class="user-avatar-small" style="cursor: pointer;" onclick="selectIcon('🎓')">🎓</div>
+                    <div class="user-avatar-small" style="cursor: pointer; background: #e74c3c;"
+                        onclick="selectIcon('🍎')">🍎</div>
+                    <div class="user-avatar-small" style="cursor: pointer; background: #f1c40f;"
+                        onclick="selectIcon('✏️')">✏️</div>
+                    <div class="user-avatar-small" style="cursor: pointer; background: #3498db;"
+                        onclick="selectIcon('⚽')">⚽</div>
+                </div>
+            </div>
+            <button class="btn-academic btn-green" id="close-profile-btn" style="width: 100%;">SAVE & CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="hidden"
+        style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--accent-yellow); color: #2e0b4d; padding: 10px 30px; border-radius: 50px; font-weight: bold; font-family: var(--font-heading); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+        Saved!</div>
+
+    <script type="module" src="js/lobby.js"></script>
+    <script>
+        // Inline helper for icon selection to keep logic simple without changing JS file too much
+        window.selectIcon = (icon) => {
+            // We'll let lobby.js handle the actual logic, this just bridges click to the UI state
+            // Or ideally lobby.js should attach these listeners. 
+            // For now, let's leave this and let lobby.js init handle it via class selectors if possible.
+        }
+    </script>
+</body>
+
+</html>

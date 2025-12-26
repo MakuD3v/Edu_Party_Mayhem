@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EDU PARTY MAYHEM - Results</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="glass-panel">
+        <h2>FINAL RANKINGS</h2>
+        <div id="leaderboard">
+            Loading results...
+        </div>
+        <button class="btn" onclick="window.location.href='lobby.html'">Return to Lobby</button>
+    </div>
+    <script>
+        // Simple fetch or shared state could populate this.
+        // For scaffold, just showing placeholder text as we rely on session persistence.
+        // In real app, fetch /api/sessions/{code}/results
+        document.getElementById('leaderboard').innerHTML = `
+            <div style="font-size: 2rem;">🥇 1st Place: Player X</div>
+            <div style="font-size: 1.5rem;">🥈 2nd Place: Player Y</div>
+            <div style="font-size: 1.2rem;">🥉 3rd Place: Player Z</div>
+        `;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EDU PARTY MAYHEM - Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Game Stages - Hidden by default */
+        .stage {
+            display: none;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .active-stage {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* INTRO STAGE */
+        #stage-intro {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .mega-icon {
+            font-size: 8em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* TUTORIAL STAGE */
+        #stage-tutorial {
+            background: rgba(46, 11, 77, 0.95);
+            z-index: 100;
+        }
+
+        .tutorial-card {
+            background: #2d5a3f;
+            border: 8px solid #a89f91;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        /* COUNTDOWN STAGE */
+        #stage-countdown {
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+        }
+
+        #countdown-number {
+            font-size: 10em;
+            font-family: var(--font-heading);
+            color: var(--accent-yellow);
+        }
+
+        /* GAME PROPER STAGE */
+        #stage-game {
+            background: var(--bg-purple);
+            padding: 20px;
+            text-align: center;
+            justify-content: flex-start;
+            padding-top: 50px;
+            box-sizing: border-box;
+        }
+
+        /* Game Specific UI: Tech Sprint */
+        .progress-track {
+            width: 90%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .track-line {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            z-index: 0;
+        }
+
+        .player-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f1c40f;
+            border: 3px solid white;
+            position: absolute;
+            transition: left 0.5s ease;
+            z-index: 10;
+        }
+
+        .answer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: auto;
+            margin-bottom: 50px;
+        }
+
+        .answer-btn {
+            background: #3498db;
+            color: white;
+            font-family: var(--font-heading);
+            padding: 20px;
+            border-radius: 15px;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #2980b9;
+            transition: transform 0.1s;
+        }
+
+        .answer-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STAGE 1: INTRO -->
+    <div id="stage-intro" class="stage">
+        <h3 style="margin:0; opacity: 0.8;">NEXT UP:</h3>
+        <div class="mega-icon" id="intro-icon">🚀</div>
+        <h1 style="font-size: 4em; margin: 0;" id="intro-title">TECH SPRINT</h1>
+    </div>
+
+    <!-- STAGE 2: TUTORIAL -->
+    <div id="stage-tutorial" class="stage">
+        <div class="tutorial-card">
+            <div style="font-size: 3em; margin-bottom: 20px;" id="tut-icon">🚀</div>
+            <h1 id="tut-title" style="color: var(--accent-yellow);">TECH SPRINT</h1>
+            <p id="tut-desc" style="font-size: 1.2em; margin-bottom: 30px;">Race to the finish line!</p>
+
+            <div
+                style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                <ul id="tut-rules"
+                    style="list-style: none; padding: 0; margin: 0; font-family: var(--font-body); font-size: 1.1em; line-height: 1.8;">
+                    <!-- Rules injected here -->
+                </ul>
+            </div>
+
+            <p style="opacity: 0.7; font-size: 0.9em;">Game starts in <span id="tut-timer">5</span> seconds...</p>
+        </div>
+    </div>
+
+    <!-- STAGE 3: COUNTDOWN -->
+    <div id="stage-countdown" class="stage">
+        <div id="countdown-number">3</div>
+    </div>
+
+    <!-- STAGE 4: GAME PROPER -->
+    <div id="stage-game" class="stage">
+        <!-- Header -->
+        <div class="user-pill">
+            <div class="user-avatar-small">🎓</div>
+            <span id="user-name-small">Me</span>
+        </div>
+
+        <h2 id="game-round-indicator" style="opacity: 0.7;">ROUND 1</h2>
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 800px; margin: 0 auto;">
+            <h1 id="game-title-main" style="margin: 0;">TECH SPRINT</h1>
+            <h1 id="game-timer" style="margin: 0; font-variant-numeric: tabular-nums; color: var(--accent-yellow);">
+            </h1>
+        </div>
+
+        <!-- Content Area -->
+        <div class="progress-track" id="track-container">
+            <!-- pLAYERS -->
+            <div class="player-dot" style="left: 0%; background: #f1c40f;" id="my-player-dot"></div>
+        </div>
+
+        <!-- MODE: QUIZ -->
+        <div id="game-mode-quiz" class="game-mode-container">
+            <div
+                style="background: rgba(0,0,0,0.3); padding: 30px; border-radius: 20px; width: 100%; max-width: 800px; margin-bottom: 20px;">
+                <h2 id="question-text" style="font-family: var(--font-heading);">Question loading...</h2>
+            </div>
+            <div class="answer-grid" id="answer-options"></div>
+        </div>
+
+        <!-- MODE: TYPING -->
+        <div id="game-mode-typing" class="game-mode-container hidden">
+            <div
+                style="background: rgba(0,0,0,0.4); padding: 30px; border-radius: 10px; width: 100%; max-width: 800px; margin-bottom: 20px; text-align: left;">
+                <p id="typing-target" style="font-family: monospace; font-size: 1.5em; line-height: 1.6; color: #aaa;">
+                </p>
+            </div>
+            <textarea id="typing-input" rows="3"
+                style="width: 100%; max-width: 800px; padding: 15px; font-size: 1.5em; font-family: monospace; background: rgba(255,255,255,0.1); color: white; border: 2px solid white; border-radius: 10px;"
+                placeholder="Type here..."></textarea>
+        </div>
+
+        <!-- MODE: SYNTAX -->
+        <div id="game-mode-syntax" class="game-mode-container hidden">
+            <h3 style="opacity: 0.8;">Fill in the blank:</h3>
+            <div
+                style="background: #282c34; padding: 30px; border-radius: 10px; width: 100%; max-width: 800px; margin-bottom: 20px; text-align: left; font-family: monospace; color: #abb2bf; font-size: 1.5em;">
+                <pre id="syntax-code" style="margin: 0; white-space: pre-wrap;">print("Hello World")</pre>
+            </div>
+            <input type="text" id="syntax-input"
+                style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.5em; text-align: center; border-radius: 10px; border: 2px solid var(--accent-yellow); background: rgba(0,0,0,0.3); color: white;"
+                placeholder="Type answer">
+            <button id="syntax-submit" class="btn-academic btn-green" style="margin-top: 10px;">SUBMIT</button>
+        </div>
+
+        <!-- MODE: MATH -->
+        <div id="game-mode-math" class="game-mode-container hidden">
+            <div
+                style="background: rgba(0,0,0,0.3); padding: 40px; border-radius: 20px; margin-bottom: 30px; width: 100%; max-width: 600px;">
+                <h1 id="math-problem" style="font-size: 5em; margin: 0; font-family: var(--font-heading);">1 + 1</h1>
+            </div>
+            <input type="number" id="math-input"
+                style="font-size: 3em; width: 200px; text-align: center; padding: 10px; border-radius: 15px; border: none; outline: none;"
+                placeholder="?">
+            <button id="math-submit" class="btn-academic btn-yellow"
+                style="font-size: 2em; padding: 10px 40px; margin-top: 20px;">GO</button>
+        </div>
+
+        <!-- MODE: TRUE/FALSE -->
+        <div id="game-mode-tf" class="game-mode-container hidden">
+            <h2 id="tf-statement" style="font-size: 2.5em; margin: 0 0 50px 0; max-width: 800px;">Python is compiled?
+            </h2>
+            <div style="display: flex; gap: 40px; justify-content: center; width: 100%;">
+                <button id="tf-true" class="btn-academic btn-green"
+                    style="font-size: 3em; padding: 40px 60px; flex: 1; max-width: 300px;">TRUE</button>
+                <button id="tf-false" class="btn-academic btn-red"
+                    style="font-size: 3em; padding: 40px 60px; flex: 1; max-width: 300px;">FALSE</button>
+            </div>
+            <h3 id="tf-score-goal" style="margin-top: 30px; opacity: 0.8;">0/10 Correct</h3>
+        </div>
+    </div>
+
+    <!-- STAGE 5: INTERMISSION -->
+    <div id="stage-intermission" class="stage">
+        <h1>ROUND COMPLETE!</h1>
+        <!-- ... -->
+    </div>
+
+    <script type="module" src="js/game.js"></script>
+</body>
+
+</html>
