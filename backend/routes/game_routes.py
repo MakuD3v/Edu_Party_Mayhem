@@ -287,15 +287,8 @@ async def websocket_endpoint(websocket: WebSocket, session_code: str, user_id: i
                 else:
                     print(f"⚠️ PLAYER_READY_FOR_ROUND received but no active game session for {session_code}")
             
-            elif msg_type == "ROUND_COMPLETE":
-                # Player has finished round (time up or goal met)
-                if "game_session" in session_state[session_code]:
-                    game_session = session_state[session_code]["game_session"]
-                    score = msg.get("score", 0)
-                    print(f"📥 ROUND_COMPLETE from User {user_id}: Score {score}")
-                    
-                    # Record score and check for round completion
-                    await game_session.handle_player_finish(user_id, score)
+            # Duplicate ROUND_COMPLETE handler removed
+
             
     except WebSocketDisconnect:
         manager.disconnect(websocket, session_code)

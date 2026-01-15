@@ -210,7 +210,10 @@ class GameFlow {
 
         document.getElementById('math-submit').onclick = submitMath;
         document.getElementById('math-input').onkeydown = (e) => {
-            if (e.key === 'Enter') submitMath();
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent any form submission or page refresh
+                submitMath();
+            }
         };
 
         renderScaleQuestion();
@@ -407,6 +410,7 @@ class GameFlow {
 
     static finishGame() {
         if (!gameActive) return;
+        console.trace('🏁 finishGame called from:');
         gameActive = false;
         console.log('🏁 Game Finished!');
 
