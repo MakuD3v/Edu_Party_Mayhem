@@ -12,13 +12,13 @@ class FixSyntax(BaseGame):
 
     def start(self, players: List[Dict[str, Any]]) -> Dict[str, Any]:
         pool = [
-            {"code": "print('Hello ' + ____)", "answer": "world", "hint": "Typical greeting"},
-            {"code": "if x ____ 10:\n  print('Ten')", "answer": "==", "hint": "Equality operator"},
-            {"code": "def my_func(___):\n  return x", "answer": "x", "hint": "Function argument"},
-            {"code": "lst = [1, 2, 3]\nprint(lst[___])", "answer": "0", "hint": "First index"},
-            {"code": "import ____ as pd", "answer": "pandas", "hint": "Data Science Lib"},
-            {"code": "for i in ____(5):", "answer": "range", "hint": "Loop sequence generator"},
-            {"code": "dict = {'key': ____}", "answer": "value", "hint": "Key-Pair"}
+            {"code": "print('Hello ' + ____)", "answer": "world"},
+            {"code": "if x ____ 10:\n  print('Ten')", "answer": "=="},
+            {"code": "def my_func(___):\n  return x", "answer": "x"},
+            {"code": "lst = [1, 2, 3]\nprint(lst[___])", "answer": "0"},
+            {"code": "import ____ as pd", "answer": "pandas"},
+            {"code": "for i in ____(5):", "answer": "range"},
+            {"code": "dict = {'key': ____}", "answer": "value"}
         ]
         # Random sample with plenty of items
         self.puzzles = []

@@ -55,8 +55,18 @@ class MathQuiz(BaseGame):
     def _generate_question(self):
         a = random.randint(1, 12)
         b = random.randint(1, 12)
-        op = random.choice(['+', '-', '*'])
-        if op == '+': ans = a + b
-        elif op == '-': ans = a - b
-        else: ans = a * b
-        return {"text": f"{a} {op} {b}", "answer": ans}
+        op = random.choice(['+', '-', '*', '/'])
+        if op == '+': 
+            ans = a + b
+            return {"text": f"{a} {op} {b}", "answer": ans}
+        elif op == '-': 
+            ans = a - b
+            return {"text": f"{a} {op} {b}", "answer": ans}
+        elif op == '*': 
+            ans = a * b
+            return {"text": f"{a} {op} {b}", "answer": ans}
+        else:
+            # Division: ensure clean integer result
+            # a is the quotient, b is the divisor
+            dividend = a * b
+            return {"text": f"{dividend} / {b}", "answer": a}
